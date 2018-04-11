@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Phly\KeepAChangelog;
 
+use Jean85\PrettyVersions;
+use PackageVersions\Versions;
 use Symfony\Component\Console\Application;
 
 // Setup/verify autoloading
@@ -25,7 +27,8 @@ if (file_exists($a = __DIR__ . '/../../../autoload.php')) {
 }
 
 
-$application = new Application('keep-a-changelog', '1.0.3dev1');
+$version = PrettyVersions::getVersion(Versions::ROOT_PACKAGE_NAME)->getPrettyVersion();
+$application = new Application('keep-a-changelog', $version);
 $application->addCommands([
     new ReleaseCommand('release'),
     new TaggerCommand('tag'),
